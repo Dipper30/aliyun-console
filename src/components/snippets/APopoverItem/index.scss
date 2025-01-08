@@ -1,0 +1,8 @@
+.a-popover-item {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  &:hover {
+    background-color: $surface_hover;
+  }
+}

@@ -1,0 +1,41 @@
+.passport-page {
+  background-color: $surface3;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $text1;
+  .title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    .line {
+      margin-bottom: 10px;
+    }
+    letter-spacing: 0.1rem;
+    margin-bottom: 60px;
+  }
+  .ant-input {
+    color: $text1;
+    background-color: $surface2;
+    width: 300px;
+  }
+  .ant-btn {
+    color: $white;
+    background-color: $prime1;
+    border-color: $prime1;
+    &:hover {
+      color: $text1;
+      background-color: $prime_hover;
+      border-color: $prime_hover;
+    }
+  }
+  .item {
+    margin: 20px;
+    &.align-right {
+      text-align: right;
+    }
+  }
+}

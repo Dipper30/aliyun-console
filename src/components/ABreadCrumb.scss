@@ -1,0 +1,21 @@
+.a-breadcrumb-container {
+  display: flex;
+  flex-direction: row;
+  cursor: default;
+  font-size: 14px;
+  .nav-item {
+    display: flex;
+    margin-right: 10px;
+  }
+  .text {
+    color: $text1;
+    margin-right: 10px;
+    &.clickable {
+      cursor: pointer;
+      &:hover {
+        color: $prime1;
+      }
+    }
+  }
+  margin-bottom: 10px;
+}

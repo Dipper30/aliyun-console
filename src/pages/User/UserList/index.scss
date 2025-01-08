@@ -1,0 +1,8 @@
+.user-list-page {
+  .hoverable {
+    &:hover {
+      cursor: pointer;
+      color: $prime1;
+    }
+  }
+}

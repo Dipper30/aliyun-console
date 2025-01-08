@@ -1,0 +1,21 @@
+.user-detail-page {
+  .user-info {
+    margin-top: 50px;
+    .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 20px 0;
+      .label {
+        width: 150px;
+      }
+      .value {
+        min-width: 300px;
+        .ant-input {
+          width: 300px;
+        }
+      }
+    }
+  }
+}

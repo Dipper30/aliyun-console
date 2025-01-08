@@ -1,0 +1,12 @@
+.a-panel {
+  overflow: scroll;
+  max-width: 100%;
+  max-height: 100%;
+  .title {
+    font-size: 22px;
+    font-weight: 600;
+    color: $text1;
+    margin-bottom: 15px;
+  }
+  margin-bottom: 30px;
+}

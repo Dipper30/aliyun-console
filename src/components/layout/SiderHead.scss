@@ -1,0 +1,25 @@
+@use './Layout.scss' as *;
+
+.sider-head-container {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  justify-content: center;
+  align-items: center;
+  width: $normal-width;
+  height: calc($normal-height + 20px);
+  transition: 0.4s ease;
+  img {
+    width: calc($normal-width - 10px);
+    height: calc($normal-height);
+    transition: 0.4s ease;
+  }
+  &.collapsed {
+    width: $collapsed-width;
+    height: calc($collapsed-height);
+    img {
+      width: calc($collapsed-width - 10px);
+      height: calc($collapsed-height - 5px);
+    }
+  }
+}

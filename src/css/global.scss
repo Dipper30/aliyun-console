@@ -1,0 +1,508 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// @import 'tailwindcss/base';
+// @import 'tailwindcss/components';
+// @import 'tailwindcss/utilities';
+
+// $surface: var(--surface, #111);
+// $surface1: var(--surface1, #1e1e1e);
+// $surface2: var(--surface2, #212121);
+// $element: var(--element, #fff);
+// $text2: var(--text2, #e1e1e1);
+// $primary: var(--primary, #fb7299);
+// $primary_hover: var(--primary_hover, #fc90af);
+// $secondary: var(--secondary, #23ade5);
+// $secondary_hover: var(--secondary_hover, #fc90af);
+// $sider: var(--sider, #131629);
+// $sider1: var(--sider1, #112a45);
+// $sider2: var(--sider2, #c5c5c5);
+// $red: #e01010;
+// $pink: #fb7299;
+// $pink-hover: #fc90af;
+// $blue: #23ade5;
+// $blue-hover: #37bef3;
+$white: #fff;
+$black: #000;
+$border: #7e7e7e;
+$placeholder: #6c6c6c;
+
+$surface1: var(--surface1, '#141414');
+$surface2: var(--surface2, '#141414');
+$surface3: var(--surface3, '#141414');
+$surface_hover: var(--surface_hover, '#141414');
+$surface_hover_dark: var(--surface_hover_dark, '#141414');
+$surface_hover_light: var(--surface_hover_light, '#ffffff');
+
+$text1: var(--text1, '#141414');
+$text1_hover: var(--text1_hover, '#141414');
+$text2: var(--text2, '#141414');
+$text3: var(--text3, '#141414');
+
+// 元素主色
+$prime1: var(--prime1, '#141414');
+$prime2: var(--prime2, '#141414');
+$prime3: var(--prime3, '#141414');
+$prime_hover: var(--prime_hover, '#141414');
+
+// 元素辅色
+$second1: var(--second1, '#141414');
+$second2: var(--second2, '#141414');
+$second3: var(--second3, '#141414');
+$second_hover: var(--second_hover, '#141414');
+
+// 边框
+$border_dark: var(--border_dark, '#141414');
+$border_light: var(--border_light, '#141414');
+$green: var(--green, '#141414');
+$green_hover: var(--green_hover, '#141414');
+$pink: var(--pink, '#141414');
+$blue: var(--blue, '#141414');
+$red: var(--red, '#141414');
+$grey: var(--grey, '#8c8c8c');
+$black: #000000;
+$white: #ffffff;
+
+// 边栏
+$sider1: var(--sider1, '#141414');
+$sider2: var(--sider2, '#141414');
+$sider3: var(--sider3, '#141414');
+
+$error-red: rgb(195, 55, 55);
+
+$header-height: 60px;
+
+body {
+  margin: 0;
+  font-family:
+    'aptxfont',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Monaco, Menlo, Consolas, 'Courier New', monospace;
+}
+
+.non-scroller {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
+  }
+}
+
+// 对所有颜色变化做transition处理
+.color-mode-transition {
+  transition:
+    color 0.4s ease,
+    background-color 0.4s ease;
+}
+
+.delete-icon {
+  font-size: '22px';
+  color: $red;
+  cursor: pointer;
+}
+
+.a-table-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+  // .a-table-option-col {
+  //   margin-right: 10px;
+  //   margin-bottom: 10px;
+  // }
+}
+.ant-table {
+  // table scrollbar
+  background-color: $surface2;
+  .ant-table-content {
+    &::-webkit-scrollbar {
+      height: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      background: rgba(129, 129, 128, 0.85);
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: none;
+      border-radius: 0;
+      background: rgba(0, 4, 40, 0.06);
+    }
+  }
+  .ant-table-tbody > tr.ant-table-placeholder:hover > td {
+    background-color: $surface3;
+  }
+  .ant-table-placeholder {
+    &:hover {
+      background-color: $surface3 !important;
+    }
+  }
+  .ant-table-cell {
+    &:hover {
+      background-color: $surface3;
+    }
+    background-color: $surface3;
+  }
+  .ant-table-expanded-row-fixed {
+    &:hover {
+      background-color: $surface3;
+    }
+  }
+
+  .ant-empty-image {
+    svg {
+      color: $text3;
+    }
+  }
+  .ant-empty-description {
+    color: $text3;
+  }
+
+  .ant-table-cell {
+    background-color: $surface1;
+    color: $text1;
+    &:hover {
+      background-color: $surface_hover;
+      color: $text1;
+    }
+  }
+
+  .ant-table-thead > tr > th,
+  .ant-table-thead > tr > td {
+    background-color: $surface1;
+    color: $text1;
+    border-color: $surface2;
+    &:hover {
+      background-color: $surface_hover;
+      color: $text1;
+    }
+  }
+
+  .ant-table-tbody > tr > td {
+    border-bottom: 1px solid $surface2;
+  }
+
+  .ant-table-tbody > tr.ant-table-row:hover > td {
+    background-color: $surface_hover;
+  }
+  .ant-table-row {
+    &:hover {
+      background-color: $surface_hover;
+      color: $text1;
+    }
+    .ant-table-cell {
+      &.ant-table-cell-row-hover {
+        background-color: $surface3;
+        color: $text1;
+      }
+    }
+  }
+}
+
+.ant-switch {
+  color: $white;
+  // &-checked {
+  //   background: #e1e1e1;
+  //   background-color: #e1e1e1;
+  // }
+  &-inner {
+    color: #1e1e1e;
+  }
+  &.light {
+    .ant-switch-handle::before {
+      background: #fff;
+      background-color: #fff;
+    }
+    background: #3c3c3c;
+    &:hover {
+      background: #2c2c2c;
+    }
+    &.ant-switch-checked {
+      background: #000;
+      &:hover {
+        background: #1e1e1e;
+      }
+    }
+    .ant-switch-inner {
+      .ant-switch-inner-checked {
+        color: #fff;
+      }
+    }
+  }
+  &.dark {
+    .ant-switch-handle::before {
+      background: #111;
+      background-color: #111;
+    }
+    &.ant-switch-checked {
+      background: #fff;
+      &:hover {
+        background: #e1e1e1;
+      }
+    }
+    .ant-switch-inner {
+      .ant-switch-inner-checked {
+        color: #111;
+      }
+    }
+  }
+}
+
+.ant-breadcrumb {
+  color: $text1;
+  margin-bottom: 10px;
+  a {
+    color: $text1;
+    &:hover {
+      color: $prime1;
+    }
+  }
+}
+.ant-breadcrumb-separator,
+.ant-breadcrumb-link {
+  color: $text1;
+}
+
+.ant-modal-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.a-select {
+  &:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover
+    .ant-select-selector {
+    border-color: $text3;
+    &:hover {
+      border-color: $text2;
+    }
+  }
+  // selector hover
+  .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+    border-color: $text2;
+  }
+  // selector
+  &.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    background-color: $surface3;
+    color: $text2;
+    border-color: $border;
+  }
+  .ant-select-selection-placeholder {
+    color: $placeholder;
+  }
+  .ant-select-arrow {
+    color: $text2;
+  }
+}
+
+.ant-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ant-checkbox-wrapper,
+.ant-checkbox {
+  color: $text2;
+}
+
+.ant-input {
+  background-color: $surface3;
+  color: $text2;
+  border: 1px solid $border;
+  border-radius: 4px;
+  // padding: 6px 12px;
+  box-sizing: border-box;
+  display: block;
+  &:hover {
+    border: 1px solid $text2;
+  }
+  &:focus {
+    border: 1px solid $text2;
+  }
+  &::placeholder {
+    color: $placeholder;
+  }
+}
+
+.ant-input-number {
+  background-color: $surface3;
+  border: 1px solid $border;
+  color: $text1;
+  &:hover {
+    border: 1px solid $text2;
+  }
+  &:focus {
+    border: 1px solid $text2;
+  }
+  .ant-input-number-handler {
+    height: 50%;
+    &-wrap {
+      background-color: $surface1;
+      background: $surface1;
+      color: $text2;
+      .ant-input-number-handler-up-inner,
+      .ant-input-number-handler-down-inner {
+        color: $text2;
+        &:hover {
+          color: $prime1;
+          svg {
+            color: $prime1;
+          }
+        }
+      }
+      .ant-input-number-handler {
+        height: 50%;
+        span {
+          &:hover {
+            color: $prime1;
+          }
+        }
+        &:hover {
+          height: 50%;
+          color: $prime1;
+          svg {
+            color: $prime1;
+          }
+        }
+      }
+    }
+    &:hover {
+      height: 50%;
+      .ant-input-number-handler-up-inner {
+        color: $prime1;
+      }
+    }
+  }
+  .ant-input-number-input {
+    color: $text1;
+  }
+}
+
+.ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  color: $text2 !important;
+}
+.ant-pagination .ant-pagination-disabled .ant-pagination-item-link {
+  color: $text1_hover !important;
+}
+
+.ant-modal {
+  top: 0 !important;
+  max-width: 600px;
+  max-height: 900px;
+  .ant-modal-body {
+    .edit-btn {
+      position: absolute;
+      right: 40px;
+      top: 70px;
+    }
+    .container {
+      max-height: 85vh;
+      overflow-y: scroll;
+    }
+    .row {
+      display: flex;
+      flex-direction: row;
+      margin: 10px;
+      justify-content: flex-start;
+      align-items: center;
+      .label {
+        text-align: left;
+        width: 100px;
+        margin-right: 20px;
+      }
+      .input {
+        width: 300px;
+      }
+    }
+  }
+  .ant-modal-content {
+    color: $text2;
+    position: relative;
+    background-color: $surface1;
+    background-clip: padding-box;
+    border: 0;
+    margin: auto;
+    border-radius: 2px;
+    pointer-events: auto;
+    max-width: 2000px;
+    display: inline-block;
+    padding: 14px 20px;
+  }
+  .ant-modal-header {
+    background-color: $surface1;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    .ant-modal-title {
+      color: $text1;
+    }
+    border-bottom: 1px solid $surface3;
+    color: $text1;
+  }
+  .ant-modal-footer {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid $surface3;
+  }
+  .ant-modal-close {
+    color: inherit;
+    &:hover {
+      color: inherit;
+    }
+  }
+}
+
+.common-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $surface2;
+  img {
+    // width: 30%;
+    // max-width: 600px;
+    // min-width: 100px;
+    height: auto;
+    margin-bottom: 50px;
+    border-radius: 15px;
+  }
+  font-size: 18px;
+  font-weight: 400;
+  color: $text1;
+}
+
+$small-screen-width: 600px;
+$middle-screen-width: 1200px;
+$large-screen-width: 1800px;
+
+$small-screen-height: 475px;
+$middle-screen-height: 750px;
+$large-screen-height: 1200px;
+
+$small-font-size: 12px;
+$middle-font-size: 14px;
+$large-font-size: 16px;
+
+$small-bar-height: 44px;
+$middle-bar-height: 55px;
+$large-bar-height: 60px;

@@ -1,0 +1,58 @@
+.a-table-container {
+  .filter-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    .ant-btn {
+      margin: 0 10px;
+    }
+    .filter-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      height: 60px;
+      align-items: center;
+      .filter-label {
+        width: max-content;
+        min-width: 50px;
+      }
+      .filter-input {
+        margin: 0 20px;
+        min-width: 120px;
+      }
+    }
+  }
+
+  .operation-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.1rem;
+    }
+    .btns {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      .ant-btn {
+        margin-right: 10px;
+      }
+    }
+    margin: 20px 0 20px;
+  }
+
+  .table-container {
+    .ant-pagination {
+      text-align: right;
+      margin: 20px 0;
+    }
+  }
+
+  .ant-pagination-total-text {
+    color: $text1;
+  }
+}

@@ -1,0 +1,121 @@
+@use "@/css/global" as *;
+
+$normal-width: 180px;
+$collapsed-width: 60px;
+$normal-height: 40px;
+$collapsed-height: 40px;
+
+.layout-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: $surface2;
+  position: relative;
+  color: $text1;
+  cursor: default;
+  .header-container {
+    height: $normal-height;
+    width: 100vw;
+    position: absolute;
+    background-color: $surface2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.4s ease;
+    z-index: 1;
+    box-shadow: 6px -1px 13px 4px rgb(50 50 50 / 30%);
+
+    .title {
+      color: $text1;
+      font-weight: 500;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+    &.collapsed {
+      left: $collapsed-width;
+      width: calc(100vw - $collapsed-width);
+      height: $collapsed-height;
+    }
+    .user {
+      font-size: 14px;
+      font-weight: 600;
+      text-align: left;
+      width: 100px;
+      transition: 0.1s ease;
+      cursor: pointer;
+      &:hover {
+        color: $text1;
+      }
+    }
+  }
+  .sider-container {
+    width: $normal-width;
+    height: calc(100vh - $normal-height);
+    position: absolute;
+    top: $normal-height;
+    background-color: $sider1;
+    color: $white;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 80px;
+    box-sizing: border-box;
+    &.collapsed {
+      width: $collapsed-width;
+    }
+    .sider-footer {
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .language-selector {
+        &:hover {
+          color: $prime1;
+        }
+        .language-drop-down-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          &:hover {
+            cursor: pointer;
+          }
+          .text {
+            font-size: 13px;
+          }
+        }
+      }
+      .theme-selector {
+        width: 100%;
+        text-align: right;
+        img {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+  .content-container {
+    width: calc(100vw - $normal-width);
+    height: calc(100vh - $normal-height);
+    position: absolute;
+    top: $normal-height;
+    left: $normal-width;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    background-color: $surface2;
+    transition: 0.4s ease;
+    color: $text1;
+    &.collapsed {
+      left: $collapsed-width;
+      top: $collapsed-height;
+      width: calc(100vw - $collapsed-width);
+    }
+  }
+}
+.selected {
+  color: $prime1;
+}

@@ -1,0 +1,54 @@
+{
+  "title": "APTX4869 Studio Admin Template",
+  "username": "Username",
+  "password": "Password",
+  "day": "day",
+  "night": "night",
+  "logout": "Log Out",
+  "lang": {
+    "en": "English",
+    "zhCN": "Simplified Chinese",
+    "zhTW": "Traditional Chinese",
+    "en-abbre": "en",
+    "zhCN-abbre": "简",
+    "zhTW-abbre": "繁"
+  },
+  "page": {
+    "home": "Home",
+    "home-abbre": "Home",
+    "user": "User",
+    "user-abbre": "User",
+    "access": "Access",
+    "access-abbre": "Access",
+    "user-list": "UserList",
+    "user-list-abbre": "Users",
+    "auth": "Authorities",
+    "auth-abbre": "Authorities",
+    "role": "Roles",
+    "role-abbre": "Roles"
+  },
+  "table": {
+    "reset": "Reset",
+    "search": "Search",
+    "options": "Options",
+    "create-user": "Create User",
+    "check-auth": "Check Auth",
+    "record-count": "{{num}} {{record}} in total"
+  },
+  "table-data": {
+    "email": "Email",
+    "username": "Username",
+    "role": "Role",
+    "created-at": "Created At",
+    "creator": "Creator",
+    "user-id": "User ID",
+    "user-role": "User Role",
+    "user-role-pl": "Select Role"
+  },
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "confirm-modification": "Confirm",
+  "cancel-modification": "Cancel",
+  "add": "Add",
+  "delete": "Delete"
+}
