@@ -2,61 +2,61 @@
 
 type TThemeProperty = {
   // 背景色
-  surface1: string
-  surface2: string
-  surface3: string
-  surface_hover: string
-  surface_hover_dark: string
-  surface_hover_light: string
+  surface1: string;
+  surface2: string;
+  surface3: string;
+  surface_hover: string;
+  surface_hover_dark: string;
+  surface_hover_light: string;
 
   // 文字
-  text1: string
-  text1_hover: string
-  text2: string
-  text3: string
+  text1: string;
+  text1_hover: string;
+  text2: string;
+  text3: string;
 
   // 元素主色
-  prime1: string
-  prime2: string
-  prime3: string
-  prime_hover: string
+  prime1: string;
+  prime2: string;
+  prime3: string;
+  prime_hover: string;
 
   // 元素辅色
-  second1: string
-  second2: string
-  second3: string
-  second_hover: string
+  second1: string;
+  second2: string;
+  second3: string;
+  second_hover: string;
 
   // 边框
-  border_dark: string
-  border_light: string
+  border_dark: string;
+  border_light: string;
 
   // 固定色
-  green: string
-  green_hover: string
-  pink: string
-  red: string
-  blue: string
-  grey: string
+  green: string;
+  green_hover: string;
+  pink: string;
+  red: string;
+  blue: string;
+  grey: string;
 
-  sider1?: string
-  sider2?: string
-  sider3?: string
+  sider1?: string;
+  sider2?: string;
+  sider3?: string;
 
-  [key: string]: string
-}
+  [key: string]: string;
+};
 
 type TThemeType = {
-  light: TThemeProperty
-  dark: TThemeProperty
-}
+  light: TThemeProperty;
+  dark: TThemeProperty;
+};
 
 interface ImgResponse {
-  name: string
-  data: string
-  id: string
-  picType: string
-  type: string
+  name: string;
+  data: string;
+  id: string;
+  picType: string;
+  type: string;
 }
 
 // type APIResponse<T = any, S extends boolean = any> = {
@@ -69,20 +69,20 @@ interface ImgResponse {
 
 type APIResponse<T = any> =
   | {
-      success: true
-      code: number
-      msg: string
-      data: NonNullable<T>
-      hideMsg?: boolean
+      success: true;
+      code: number;
+      msg: string;
+      data: NonNullable<T>;
+      hideMsg?: boolean;
     }
   | {
-      success: false
-      code: number
-      msg: string
-      errMsg?: string
-      data?: T
-      hideMsg?: boolean
-    }
+      success: false;
+      code: number;
+      msg: string;
+      errMsg?: string;
+      data: T;
+      hideMsg?: boolean;
+    };
 
 // | {
 //     success: false
@@ -92,106 +92,107 @@ type APIResponse<T = any> =
 //     data?: T
 //   }
 
-type SuccessfulAPIResponse<T = any> = APIResponse<T, true>
+type SuccessfulAPIResponse<T = any> = APIResponse<T, true>;
 
-type APIPromise<T> = Promise<APIResponse<T>>
+type APIPromise<T> = Promise<APIResponse<T>>;
 
 interface SocketResponse<T> {
-  code: number
-  msg: string
-  data: T
+  code: number;
+  msg: string;
+  data: T;
 }
 
 interface SiderMenuItem {
-  id: number
-  name: string
-  abbr: string
-  auth?: number[]
-  icon?: any
-  path?: string
-  children?: SiderMenuItem[]
+  id: number;
+  name: string;
+  abbr: string;
+  auth?: number[];
+  icon?: any;
+  path?: string;
+  children?: SiderMenuItem[];
 }
 
 interface SiderSubMenuItem {
-  id: number
-  name: string
-  abbr: string
-  auth?: number[]
-  path?: string
+  id: number;
+  name: string;
+  abbr: string;
+  auth?: number[];
+  path?: string;
 }
 interface SearchBoxConfig {
-  type: string
-  label: string
-  value: string
-  placeholder?: string
-  prop?: string
-  dynamic?: string
-  width?: number
-  selections?: SelectorOptionConfig[]
-  optionName?: string
-  options?: any
+  type: string;
+  label: string;
+  value: string;
+  placeholder?: string;
+  prop?: string;
+  dynamic?: string;
+  width?: number;
+  selections?: SelectorOptionConfig[];
+  optionName?: string;
+  options?: any;
 }
 
 interface OperationConfig {
-  title: string
-  buttons?: { label: string; eventName: string; auth?: number[] }[]
+  title: string | Function;
+  buttons?: { label: string; eventName: string; auth?: number[] }[];
+  render?: any;
 }
 
 interface SelectorOptionConfig {
-  value: any
-  label: string
+  value: any;
+  label: string;
 }
 
 interface TableColumnConfig {
-  title: string
-  dataIndex: string
-  key: string
-  width?: number
-  fixed?: string
-  render?: (...args) => JSX.Element
+  title: string;
+  dataIndex: string;
+  key: string;
+  width?: number;
+  fixed?: string;
+  render?: (...args) => JSX.Element;
 }
 
 interface TableConfig {
-  indexed: boolean
-  columns: ColumnsType<any>
+  indexed: boolean;
+  columns: ColumnsType<any>;
 }
 
 interface ATableConfig {
-  filter?: any
-  filterOptions?: SearchBoxConfig[]
-  operation: OperationConfig
-  table: TableConfig
+  filter?: any;
+  filterOptions?: SearchBoxConfig[];
+  operation?: OperationConfig;
+  table: TableConfig;
 }
 
 interface ABreadCrumbConfig {
-  route?: string
-  text: string
+  route?: string;
+  text: string;
 }
 
 type TCommon = {
-  selectedMenu: number
-  menuCollapsed: boolean
-  theme: keyof TThemeType
-  language: LANGUAGE
-}
+  selectedMenu: number;
+  menuCollapsed: boolean;
+  theme: keyof TThemeType;
+  language: LANGUAGE;
+};
 
 type TStoreAction<T, D> = {
-  type: T
-  data: D
-}
+  type: T;
+  data: D;
+};
 
 type TSiderMenuItem = {
-  id: number
-  name: string
-  abbr: string
-  auth?: number[]
-  breadcrumb?: ABreadCrumbConfig[]
-  icon?: any
-  path?: string
-  children?: TSiderMenuItem[]
-}
+  id: number;
+  name: string;
+  abbr: string;
+  auth?: number[];
+  breadcrumb?: ABreadCrumbConfig[];
+  icon?: any;
+  path?: string;
+  children?: TSiderMenuItem[];
+};
 
 type Pagination = {
-  page: number
-  size: number
-}
+  page: number;
+  size: number;
+};

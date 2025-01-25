@@ -1,4 +1,5 @@
 import { LANGUAGE, MenuPageCode, STORAGE_KEY } from '@/config/constants';
+import dayjs from 'dayjs';
 import moment from 'moment';
 
 /**
@@ -62,10 +63,16 @@ export const getTS = (): number => {
   return Date.now();
 };
 
-export const generateDateByTs = (ts?: number | null, format: string = 'YY-MM-DD hh:mm:ss'): string => {
-  if (!ts) ts = getTS();
-  if (!format) format = 'YY-MM-DD hh:mm:ss';
-  return moment(ts).format(format);
+export const formatTime = (ts?: number | Date | null, format: string = 'YY-MM-DD hh:mm:ss'): string => {
+  if (!ts) ts = new Date();
+  if (typeof ts === 'number') {
+    if (ts?.toString().length === 10) {
+      ts = ts * 1000;
+    }
+  }
+
+  const time = dayjs(ts);
+  return time.format(format);
 };
 
 /**
@@ -108,7 +115,6 @@ export const getBrowserLanguage = () => {
   const language = nav.userLanguage || nav.language;
   if (['en-US', 'en', 'en-us', 'en_US', 'en_us'].includes(language)) return LANGUAGE.EN;
   if (['zh', 'zh-cn', 'zh-CN', 'zh_cn', 'zh_CN'].includes(language)) return LANGUAGE.ZH_CN;
-  if (['zh-TW', 'zh-tw', 'zh_TW', 'zh_tw'].includes(language)) return LANGUAGE.ZH_TW;
   return LANGUAGE.EN;
 };
 
@@ -148,4 +154,24 @@ export const findMenu = (code: MenuPageCode, list: TSiderMenuItem[] = []): TSide
     if (res) return res;
   }
   return null;
+};
+
+export const getFileSize = (size: number) => {
+  return size > 1024 * 1024
+    ? `${(size / (1024 * 1024)).toFixed(2)}MB`
+    : size > 1024
+      ? `${(size / 1024).toFixed(2)}KB`
+      : `${size.toFixed(2)}KB`;
+};
+
+export const getCdnDirName = (dirContext: {
+  parents: ModelType.BucketFileDir[];
+  current?: ModelType.BucketFileDir;
+  children: ModelType.BucketFileDir[];
+}) => {
+  if (!dirContext.current) {
+    return 'root /';
+  } else if (!dirContext.parents.length) {
+    return `root / ${dirContext.current.name} /`;
+  } else return `root / ${dirContext.parents.map(p => p.name).join(' / ')} / ${dirContext.current.name} /`;
 };

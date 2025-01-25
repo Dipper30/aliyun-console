@@ -73,6 +73,41 @@ $error-red: rgb(195, 55, 55);
 
 $header-height: 60px;
 
+$text-primary: #040b29;
+$text-secondary: #595e72;
+$text-tertiary: #868a9a;
+$text-warning: #fda71c;
+$text-brand-default: #01a0ac;
+$text-brand-press: #008c99;
+$text-brand-hover: #00b3be;
+$text-disable: #bbbdc7;
+$text-error-default: #e83030;
+$text-icon-secondary: #73757a;
+$text-success-default: #26bd4b;
+
+$bg-default: #fff;
+$bg-hover: rgba(4, 11, 41, 0.06);
+$bg-disable: #f6f7fa;
+$bg-weak-hover: #e5f9f9;
+$bg-error-weak-default: #ffded9;
+$bg-secondary: #f6f7fa;
+$bg-tertiary: #ecedf1;
+$bg-brand-default: #00b3be;
+$bg-brand-hover: #21c9cc;
+$bg-active: rgba(156, 159, 172, 0.15);
+
+$divider-default: #e6e7ec;
+$divider-weak: #f6f7fa;
+$divider-moderate: #ced0d8;
+$border-default: #ced0d8;
+$border-hover: #e6e7ec;
+$border-press: #9c9fac;
+$border-divider2: #e6e7ec;
+$border-brand-default: #00b3be;
+$border-brand-hover: #e5f9f9;
+
+$white: #fff;
+
 body {
   margin: 0;
   font-family:
@@ -506,3 +541,65 @@ $large-font-size: 16px;
 $small-bar-height: 44px;
 $middle-bar-height: 55px;
 $large-bar-height: 60px;
+
+
+a {
+  cursor: pointer;
+  &[data-type='error'] {
+    color: #e83030;
+  }
+  &[data-type='disable'] {
+    color: $text-disable;
+    cursor: no-drop;
+  }
+  &:hover {
+    &[data-type='error'] {
+      color: #e83030;
+    }
+    &[data-type='disable'] {
+      color: $text-disable;
+    }
+  }
+}
+
+.text-primary {
+  color: $text-primary;
+}
+
+.text-tertiary {
+  font-size: 14px;
+  line-height: 22px;
+  color: $text-tertiary;
+}
+
+.text-warning {
+  font-size: 14px;
+  line-height: 22px;
+  color: $text-warning;
+}
+
+.text-error {
+  font-size: 14px;
+  line-height: 22px;
+  color: $text-error-default;
+}
+
+.text-success {
+  font-size: 14px;
+  line-height: 22px;
+  color: $text-success-default;
+}
+
+.text-link {
+  cursor: pointer;
+  color: $text-secondary;
+  &:hover {
+    color: $text-brand-hover !important;
+  }
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

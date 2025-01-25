@@ -1,7 +1,7 @@
-import ConfigAPI from './config';
-import UserAPI from './user';
-import HomeAPI from './home';
+import configApi from './config';
+import userApi from './user';
+import homeApi from './home';
+import aliyunApi from './aliyun';
+import cdnApi from './cdn';
 
-export const configApi = ConfigAPI;
-export const userApi = UserAPI;
-export const homeApi = HomeAPI;
+export { configApi, userApi, homeApi, aliyunApi, cdnApi };

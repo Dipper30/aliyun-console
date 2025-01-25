@@ -20,6 +20,9 @@ export const enum MenuPageCode {
   ACCESS,
   AUTH_LIST,
   ROLE_LIST,
+  CDN,
+  BUCKET_LIST,
+  BUCKET_DETAIL,
 }
 
 export enum STORAGE_KEY {

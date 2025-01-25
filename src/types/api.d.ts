@@ -53,3 +53,69 @@ type AuthItem = {
   name: string;
   description: string;
 };
+
+type BucketDetail = {
+  comment: string;
+  creationDate: string;
+  blockPublicAccess: string;
+  location: string;
+  name: string;
+  owner: {
+    displayName: string;
+    id: string;
+  };
+};
+
+// type BucketFile = {
+//   etag: string;
+//   lastModified: string;
+//   name: string;
+//   owner?: any;
+//   size: number;
+//   storageClass: 'Standard';
+//   type: 'Normal';
+//   url: string;
+// };
+
+declare namespace ModelType {
+  type User = {
+    id: number;
+    username: string;
+  };
+  type BucketFile = {
+    id: string;
+    bucketName: string;
+    bucketRegion: string;
+    fileName: string;
+    fileType: string;
+    fileUrl: string;
+    dirId?: string;
+    directory?: BucketFileDir;
+    cacheControl?: number;
+    size?: number;
+    description?: string;
+    updatedBy?: User['id'];
+    updater?: User;
+    createdBy?: User['id'];
+    creator?: User;
+    updatedAt?: number;
+    createdAt: number;
+  };
+
+  type BucketFileDir = {
+    id: string;
+    name: string;
+    bucketName: string;
+    bucketRegion: string;
+    parentDirId?: string;
+    description?: string;
+
+    updatedBy?: User['id'];
+    updater?: User;
+    createdBy?: User['id'];
+    creator?: User;
+
+    updatedAt?: number;
+    createdAt: number;
+  };
+}

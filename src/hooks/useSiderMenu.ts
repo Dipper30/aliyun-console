@@ -1,4 +1,4 @@
-import { HomeOutlined, UserOutlined, KeyOutlined } from '@ant-design/icons';
+import { HomeOutlined, UserOutlined, KeyOutlined, FolderOpenOutlined } from '@ant-design/icons';
 import { AuthCode, MenuPageCode } from '@/config/constants';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
@@ -60,6 +60,23 @@ const useSiderMenu = () => {
             abbr: 'Role',
             auth: [AuthCode.LOGIN_ADMIN],
             path: '/access/role',
+          },
+        ],
+      },
+      {
+        id: MenuPageCode.CDN,
+        name: t('page.cdn'),
+        abbr: 'Cdn',
+        icon: FolderOpenOutlined,
+        auth: [AuthCode.LOGIN_ADMIN],
+        children: [
+          {
+            id: MenuPageCode.BUCKET_LIST,
+            name: '存储空间列表',
+            breadcrumb: [{ text: '存储空间列表' }],
+            abbr: 'Buckets',
+            auth: [AuthCode.LOGIN_ADMIN],
+            path: '/cdn/bucket/list',
           },
         ],
       },
