@@ -24,7 +24,8 @@
     "auth": "权限列表",
     "auth-abbre": "权限列表",
     "role": "角色列表",
-    "role-abbre": "角色列表"
+    "role-abbre": "角色列表",
+    "cdn": "CDN"
   },
   "table": {
     "reset": "重置",

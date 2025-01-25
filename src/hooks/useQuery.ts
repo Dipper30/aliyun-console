@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { errorMessage, handleResult } from '@/utils';
 
-export type QueryFunction<T = any> = (...args: any) => APIPromise<T>;
+export type QueryFunction<T = any> = (...args: any) => APIPromise<T | undefined>;
 
 export type UseQueryOptions<T = any> = {
   onSuccess?: (res: T) => void; // code = 200 | 201
@@ -27,25 +27,24 @@ const useQuery = <T = any, P = any>(fn: QueryFunction<T>, options?: UseQueryOpti
           successMessage: showSuccess ? (typeof showSuccess === 'string' ? showSuccess : res.msg) : '',
           errorMessage: typeof showError === 'string' ? showError : res.msg,
         });
-        setIsLoading(false);
         if (result) {
           setData(res.data);
-          options?.onSuccess && options.onSuccess(res.data);
+          options?.onSuccess && options.onSuccess(res.data!);
         } else {
           options?.onError && options.onError(res);
         }
         return res.data;
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         // 未知错误
+        errorMessage(`服务错误：${error}`);
+      } finally {
         setIsLoading(false);
-        errorMessage('网络问题，请稍后再试');
       }
     },
     [...(deps ?? [])],
   );
 
-  return [query, data, isLoading, setData] as const;
+  return { query, data, isLoading, setData } as const;
 };
 
 export default useQuery;

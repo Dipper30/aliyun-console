@@ -1,93 +1,97 @@
-import './ATable.scss'
-import { Table, Select, InputNumber, Button, Pagination, Input } from 'antd'
-import { useEffect, useState } from 'react'
-import { checkAuth } from '@/utils'
-import { useAppSelector } from '@/hooks/redux'
-import { useTranslation } from 'react-i18next'
+import './ATable.scss';
+import { Table, Select, InputNumber, Button, Pagination, Input } from 'antd';
+import { useEffect, useState } from 'react';
+import { checkAuth, errorMessage } from '@/utils';
+import { useAppSelector } from '@/hooks/redux';
+import { useTranslation } from 'react-i18next';
 
-const { Option } = Select
+const { Option } = Select;
 
 type ATableProps = {
-  config: ATableConfig
-  data?: any[]
-  fetchData: (p?: any) => Promise<{ data: any[]; total: number }>
-  fns: any
-  refresh?: boolean
-  setRefresh?: any
-  pagination?: boolean
-  defaultPager?: { page: number; size: number }
-}
+  config: ATableConfig;
+  data?: any[];
+  fetchData: (p?: any) => Promise<{ data: any[]; total: number }>;
+  fns?: any;
+  refresh?: boolean;
+  setRefresh?: any;
+  pagination?: boolean;
+  defaultPager?: { page: number; size: number };
+};
 
 const ATable: React.FC<ATableProps> = props => {
-  const defaultWidth = 150
-  const { t } = useTranslation()
-  const [isLoading, setIsLoading] = useState<boolean>()
-  const [tableData, setTableData] = useState<any>([])
-  const [tableTotal, setTableTotal] = useState<number>(0)
-  const [filter, setFilter] = useState<any>({})
+  const defaultWidth = 150;
+  const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState<boolean>();
+  const [tableData, setTableData] = useState<any>([]);
+  const [tableTotal, setTableTotal] = useState<number>(0);
+  const [filter, setFilter] = useState<any>({});
   const [options, setOptions] = useState<any>({
     option1: [],
     option2: [],
     option3: [],
-  })
-  const [pager, setPager] = useState<Pagination>({ page: 1, size: 20 })
+  });
+  const [pager, setPager] = useState<Pagination>({ page: 1, size: 20 });
   // const [currentPage, setCurrentPage] = useState<number>(1)
-  const user = useAppSelector(state => state.user)
+  const user = useAppSelector(state => state.user);
 
   useEffect(() => {
-    if (props.defaultPager) setPager(props.defaultPager)
-    setFilter({ ...props.config.filter })
-    fetchData(false, props.defaultPager ? props.defaultPager : pager)
-  }, [])
+    if (props.defaultPager) setPager(props.defaultPager);
+    setFilter({ ...props.config.filter });
+    fetchData(false, props.defaultPager ? props.defaultPager : pager);
+  }, []);
 
   useEffect(() => {
-    if (props.refresh === true) fetchData(true, pager)
-  }, [props.refresh])
+    if (props.refresh === true) fetchData(true, pager);
+  }, [props.refresh]);
 
   const fetchData = async (withFilter: boolean = false, pager?: Pagination) => {
-    props.setRefresh && props.setRefresh(false)
-    setIsLoading(true)
-    const p: any = {}
+    props.setRefresh && props.setRefresh(false);
+    setIsLoading(true);
+    const p: any = {};
     if (props.pagination && pager) {
-      p.page = pager.page
-      p.size = pager.size
+      p.page = pager.page;
+      p.size = pager.size;
     }
     if (withFilter) {
       for (const key in filter) {
-        if (filter[key] || filter[key] === false) p[key] = filter[key]
+        if (filter[key] || filter[key] === false) p[key] = filter[key];
       }
     }
-    const { data, total } = await props.fetchData(p)
-    setIsLoading(false)
-    setTableData(data ?? [])
-    setTableTotal(total ?? 0)
-  }
+    const { data, total } = await props.fetchData(p);
+    setIsLoading(false);
+    setTableData(data ?? []);
+    setTableTotal(total ?? 0);
+  };
 
-  const fetchDataWithFilter = () => fetchData(true)
+  const fetchDataWithFilter = () => fetchData(true);
 
   const resetFilter = () => {
     setOptions({
       option1: [],
       option2: [],
       option3: [],
-    })
-    setFilter({ ...props.config.filter })
-  }
+    });
+    setFilter({ ...props.config.filter });
+  };
 
   const fetchOptions = async (fnName: string | undefined, optionName: string | undefined) => {
-    if (!fnName || !optionName) return
-    const fn = props.fns[fnName]
-    const optionData = await fn()
-    setOptions({ ...options, [optionName]: optionData })
-  }
+    if (!fnName || !optionName) return;
+    const fn = props.fns?.[fnName];
+    if (!fn) {
+      errorMessage(`未找到组件方法：${fnName}`);
+      return;
+    }
+    const optionData = await fn?.();
+    setOptions({ ...options, [optionName]: optionData });
+  };
 
   const onPagerChange = (page: any, size: number) => {
-    setPager({ page, size })
-    fetchData(true, { page, size })
-  }
+    setPager({ page, size });
+    fetchData(true, { page, size });
+  };
 
   const filterOptions = props.config.filterOptions?.map((config, index) => {
-    let inputElement = <></>
+    let inputElement = <></>;
 
     switch (config.type) {
       case 'input':
@@ -96,11 +100,11 @@ const ATable: React.FC<ATableProps> = props => {
             value={filter[config.value]}
             placeholder={config.placeholder ?? ''}
             onChange={(e: any) => {
-              setFilter({ ...filter, [config.value]: e.target.value })
+              setFilter({ ...filter, [config.value]: e.target.value });
             }}
           />
-        )
-        break
+        );
+        break;
       case 'inputNumber':
         inputElement = (
           <InputNumber
@@ -110,11 +114,11 @@ const ATable: React.FC<ATableProps> = props => {
             max={config.options?.max ?? Number.MAX_SAFE_INTEGER}
             value={filter[config.value]}
             onChange={(e: any) => {
-              setFilter({ ...filter, [config.value]: e })
+              setFilter({ ...filter, [config.value]: e });
             }}
           />
-        )
-        break
+        );
+        break;
       case 'selector':
         if (config.dynamic) {
           // 动态下拉列表
@@ -136,7 +140,7 @@ const ATable: React.FC<ATableProps> = props => {
                 </Option>
               ))}
             </Select>
-          )
+          );
         } else
           inputElement = (
             <Select
@@ -155,10 +159,10 @@ const ATable: React.FC<ATableProps> = props => {
                 </Option>
               ))}
             </Select>
-          )
-        break
+          );
+        break;
       default:
-        break
+        break;
     }
 
     return (
@@ -166,35 +170,46 @@ const ATable: React.FC<ATableProps> = props => {
         <div className='filter-label'> {config.label} </div>
         <div className='filter-input'>{inputElement}</div>
       </div>
-    )
-  })
+    );
+  });
 
   return (
     <div className='a-table-container'>
-      <div className='filter-container'>
-        {filterOptions}
-        <Button onClick={resetFilter}> {t('table.reset')} </Button>
-        <Button type='primary' onClick={fetchDataWithFilter}>
-          &nbsp;
-          {t('table.search')}&nbsp;
-        </Button>
-      </div>
-      {props.config.operation && (
-        <div className='operation-container'>
-          <div className='title'>{props.config.operation.title}</div>
-          <div className='btns'>
-            {props.config.operation.buttons &&
-              props.config.operation.buttons
-                .filter(v => !v.auth || checkAuth(user!.auth, v.auth))
-                .map(v => (
-                  <Button key={v.label} onClick={() => props.fns[v.eventName]()}>
-                    &nbsp;
-                    {v.label}&nbsp;
-                  </Button>
-                ))}
-          </div>
+      {filterOptions && (
+        <div className='filter-container'>
+          {filterOptions}
+          <Button onClick={resetFilter}> {t('table.reset')} </Button>
+          <Button type='primary' onClick={fetchDataWithFilter}>
+            &nbsp;
+            {t('table.search')}&nbsp;
+          </Button>
         </div>
       )}
+
+      {props.config.operation && (
+        <div className='operation-container'>
+          {typeof props.config.operation.title === 'function' ? (
+            props.config.operation.title()
+          ) : (
+            <div className='title'>{props.config.operation.title}</div>
+          )}
+          {props.config.operation.render ? (
+            props.config.operation.render()
+          ) : props.config.operation.buttons ? (
+            props.config.operation.buttons
+              .filter(v => !v.auth || checkAuth(user!.auth, v.auth))
+              .map(v => (
+                <Button key={v.label} onClick={() => props.fns?.[v.eventName]?.()}>
+                  &nbsp;
+                  {v.label}&nbsp;
+                </Button>
+              ))
+          ) : (
+            <></>
+          )}
+        </div>
+      )}
+
       <div className='table-container'>
         <Table
           scroll={{ x: 1100 }}
@@ -218,7 +233,7 @@ const ATable: React.FC<ATableProps> = props => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ATable
+export default ATable;

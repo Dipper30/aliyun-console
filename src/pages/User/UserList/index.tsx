@@ -1,33 +1,33 @@
-import { useState } from 'react'
-import type { ColumnsType } from 'antd/lib/table'
-import { Button, Popconfirm } from 'antd'
-import { useNavigate } from 'react-router-dom'
-import { DeleteOutlined } from '@ant-design/icons'
-import { useTranslation } from 'react-i18next'
-import './index.scss'
-import { configApi } from '@/api'
-import { handleResult } from '@/utils'
-import ABreadCrumb from '@/components/ABreadCrumb'
-import ATable from '@/components/ATable'
-import { generateDateByTs } from '@/utils/tools'
-import CheckAuthModal from './CheckAuthModal'
-import AddUserModal from './AddUserModal'
-import AAuthElement from '@/components/snippets/AAuthElement'
-import usePageCode from '@/hooks/usePageCode'
-import { AuthCode, MenuPageCode } from '@/config/constants'
-import useSiderMenu from '@/hooks/useSiderMenu'
-import { UserRoleTag } from '@/components/snippets'
+import { useState } from 'react';
+import type { ColumnsType } from 'antd/lib/table';
+import { Button, Popconfirm } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { DeleteOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+import './index.scss';
+import { configApi } from '@/api';
+import { handleResult } from '@/utils';
+import ABreadCrumb from '@/components/ABreadCrumb';
+import ATable from '@/components/ATable';
+import { formatTime } from '@/utils/tools';
+import CheckAuthModal from './CheckAuthModal';
+import AddUserModal from './AddUserModal';
+import AAuthElement from '@/components/snippets/AAuthElement';
+import usePageCode from '@/hooks/usePageCode';
+import { AuthCode, MenuPageCode } from '@/config/constants';
+import useSiderMenu from '@/hooks/useSiderMenu';
+import { UserRoleTag } from '@/components/snippets';
 
-const UserList: React.FC<any> = () => {
-  const { t } = useTranslation()
-  const [refresh, setRefresh] = useState<boolean>(false)
-  const [addModalVisible, setAddModalVisible] = useState<boolean>(false)
-  const [checkAuthModalVisible, setCheckAuthModalVisible] = useState<boolean>(false)
-  const [currentRow, setCurrentRow] = useState<UserListItem>()
-  const navigate = useNavigate()
+const UserList: React.FC = props => {
+  const { t } = useTranslation();
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [addModalVisible, setAddModalVisible] = useState<boolean>(false);
+  const [checkAuthModalVisible, setCheckAuthModalVisible] = useState<boolean>(false);
+  const [currentRow, setCurrentRow] = useState<UserListItem>();
+  const navigate = useNavigate();
 
-  const [menu] = useSiderMenu()
-  const breadcrumb = usePageCode(MenuPageCode.USER_LIST, menu)
+  const [menu] = useSiderMenu();
+  const breadcrumb = usePageCode(MenuPageCode.USER_LIST, menu);
 
   const columnsConfig: ColumnsType<UserListItem> = [
     {
@@ -69,7 +69,7 @@ const UserList: React.FC<any> = () => {
       dataIndex: 'createdAt',
       key: 'createdAt',
       width: 100,
-      render: (ts: number) => <span> {generateDateByTs(ts, '20YY-MM-DD')} </span>,
+      render: (ts: number) => <span> {formatTime(ts, '20YY-MM-DD')} </span>,
     },
     {
       title: t('table-data.creator'),
@@ -112,7 +112,7 @@ const UserList: React.FC<any> = () => {
         </div>
       ),
     },
-  ]
+  ];
 
   const config: ATableConfig = {
     filter: {},
@@ -161,43 +161,44 @@ const UserList: React.FC<any> = () => {
       indexed: true,
       columns: columnsConfig,
     },
-  }
+  };
 
-  const showAddModal = () => setAddModalVisible(true)
+  const showAddModal = () => setAddModalVisible(true);
 
   const checkAuth = (row: UserListItem) => {
-    setCurrentRow(row)
-    setCheckAuthModalVisible(true)
-  }
+    setCurrentRow(row);
+    setCheckAuthModalVisible(true);
+  };
 
   const getRoles = async () => {
-    const roleOptions = await configApi.getRoleOptions(configApi.getRoles)
-    return roleOptions
-  }
+    const roleOptions = await configApi.getRoleOptions(configApi.getRoles);
+    return roleOptions;
+  };
 
-  const fetchData = async (filter: any): Promise<{ data: any[]; total: number }> => {
-    const res = await configApi.getUsers(filter)
-    if (!handleResult(res)) return { data: [], total: 0 }
+  const fetchData = async (filter: any) => {
+    const res = await configApi.getUsers(filter);
+    const tt = res.success;
+    if (!handleResult(res)) return { data: [], total: 0 };
     else {
       const data = res.data.rows.map((v: any) => {
-        v.key = v.id
-        return v
-      })
-      const total = res.data.count
-      return { data, total }
+        v.key = v.id;
+        return v;
+      });
+      const total = res.data.count;
+      return { data, total };
     }
-  }
+  };
 
   const deleteUser = async (id: number) => {
-    const res = await configApi.deleteUserById({ id })
+    const res = await configApi.deleteUserById({ id });
     if (!handleResult(res)) {
-      setRefresh(true)
+      setRefresh(true);
     }
-  }
+  };
 
   const onUserDetail = (id: number) => {
-    navigate(`/user/${id}`)
-  }
+    navigate(`/user/${id}`);
+  };
 
   return (
     <div className='user-list-page'>
@@ -226,7 +227,7 @@ const UserList: React.FC<any> = () => {
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default UserList
+export default UserList;

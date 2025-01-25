@@ -196,6 +196,8 @@ export default [
       '@typescript-eslint/no-unused-vars': 'warn',
       'block-spacing': 'error',
       'no-undef': 'off',
+      'no-dupe-class-members': 'warn',
+      'no-extra-boolean-cast': 'off'
     },
   },
 ];

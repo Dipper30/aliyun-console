@@ -25,7 +25,8 @@
     "auth": "Authorities",
     "auth-abbre": "Authorities",
     "role": "Roles",
-    "role-abbre": "Roles"
+    "role-abbre": "Roles",
+    "cdn": "CDN"
   },
   "table": {
     "reset": "Reset",

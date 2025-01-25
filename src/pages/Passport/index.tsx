@@ -1,44 +1,44 @@
-import { Button, Input } from 'antd'
-import { useState } from 'react'
-import { configApi } from '@/api'
-import { useDispatch } from 'react-redux'
-import { setUser } from '@/stores/actions/user'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { getParams, setLocalStorage } from '@/utils/tools'
-import './index.scss'
-import useQuery from '@/hooks/useQuery'
-import { useTranslation } from 'react-i18next'
-import { STORAGE_KEY } from '@/config/constants'
+import { Button, Input } from 'antd';
+import { useState } from 'react';
+import { configApi } from '@/api';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/stores/actions/user';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getParams, setLocalStorage } from '@/utils/tools';
+import './index.scss';
+import useQuery from '@/hooks/useQuery';
+import { useTranslation } from 'react-i18next';
+import { STORAGE_KEY } from '@/config/constants';
 
 const Passport: React.FC<any> = () => {
-  const [username, setUsername] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { t } = useTranslation()
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { t } = useTranslation();
 
   const onSignedIn = (res: LoginData) => {
-    const { user, token } = res
-    setLocalStorage(STORAGE_KEY.TOKEN, token)
-    const search = location.search
-    const p = getParams(search)
-    dispatch(setUser(user))
-    if (p.redirect) navigate(`/${p.redirect}`)
-    else navigate('/')
-  }
+    const { user, token } = res;
+    setLocalStorage(STORAGE_KEY.TOKEN, token);
+    const search = location.search;
+    const p = getParams(search);
+    dispatch(setUser(user));
+    if (p.redirect) navigate(`/${p.redirect}`);
+    else navigate('/');
+  };
 
-  const [loginQuery, data, isLoading] = useQuery(
+  const { query: loginQuery, isLoading } = useQuery(
     configApi.login,
     {
       onSuccess: onSignedIn,
     },
     [username, password, location],
-  )
+  );
 
   const login = () => {
-    loginQuery({ username, password })
-  }
+    loginQuery({ username, password });
+  };
 
   return (
     <div className='passport-page'>
@@ -68,7 +68,7 @@ const Passport: React.FC<any> = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Passport
+export default Passport;

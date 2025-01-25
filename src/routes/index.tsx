@@ -1,23 +1,25 @@
-import React, { FC, LazyExoticComponent, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
-import BeforeEnter from './BeforeEnter'
-import UserRoutes from './UserRoutes'
-import AuthRoutes from './AuthRoutes'
-import Layout from '@/components/layout/Layout'
+import React, { FC, LazyExoticComponent, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import BeforeEnter from './BeforeEnter';
+import UserRoutes from './UserRoutes';
+import AuthRoutes from './AuthRoutes';
+import CdnRoutes from './CdnRoutes';
+import Layout from '@/components/layout/Layout';
 
-import Home from '@/pages/Home'
+import Home from '@/pages/Home';
 // components
-import Page404 from '@/components/common/404'
-import Loading from '@/components/common/Loading'
-import Passport from '@/pages/Passport'
-import useTheme from '@/hooks/useTheme'
-import { getLocalStorage } from '@/utils/tools'
-import { STORAGE_KEY } from '@/config/constants'
+import Page404 from '@/components/common/404';
+import Loading from '@/components/common/Loading';
+import Passport from '@/pages/Passport';
+import useTheme from '@/hooks/useTheme';
+import { getLocalStorage } from '@/utils/tools';
+import { STORAGE_KEY } from '@/config/constants';
 
 type RouteOption = {
-  requireLogin?: boolean
-  requireRole?: number[]
-}
+  requireLogin?: boolean;
+  requireRole?: number[];
+  rootPage?: number;
+};
 
 export const routeBefore = (Node: LazyExoticComponent<FC<any>>, options?: RouteOption) => (
   <BeforeEnter options={options}>
@@ -25,25 +27,25 @@ export const routeBefore = (Node: LazyExoticComponent<FC<any>>, options?: RouteO
       <Node />
     </React.Suspense>
   </BeforeEnter>
-)
+);
 
 export const lazyComponent = (Node: LazyExoticComponent<FC<any>>) => (
   <React.Suspense fallback={<Loading />}>
     <Node />
   </React.Suspense>
-)
+);
 
 const Router: React.FC = () => {
-  const [theme, changeTheme] = useTheme()
+  const [theme, changeTheme] = useTheme();
 
   useEffect(() => {
-    const localTheme = getLocalStorage(STORAGE_KEY.THEME)
+    const localTheme = getLocalStorage(STORAGE_KEY.THEME);
     if ((localTheme && localTheme == 'dark') || (localTheme == 'light' && theme != localTheme)) {
-      changeTheme(localTheme)
+      changeTheme(localTheme);
     } else if (!localTheme) {
-      changeTheme('dark')
+      changeTheme('dark');
     }
-  }, [theme])
+  }, [theme]);
 
   const LayoutRouter = (
     <BeforeEnter options={{ requireLogin: true, requireRole: [1, 2] }}>
@@ -53,7 +55,7 @@ const Router: React.FC = () => {
         &nbsp;
       </Layout>
     </BeforeEnter>
-  )
+  );
 
   return (
     <BrowserRouter>
@@ -70,12 +72,15 @@ const Router: React.FC = () => {
 
           {/* auth */}
           {AuthRoutes()}
+
+          {/* cdn */}
+          {CdnRoutes()}
         </Route>
 
         <Route path='*' element={<Page404 />} />
       </Routes>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;

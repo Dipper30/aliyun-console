@@ -1,26 +1,27 @@
-import { HomeOutlined } from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom'
-import './ABreadCrumb.scss'
-import { useAppDispatch } from '@/hooks/redux'
-import { selectMenu } from '@/stores/actions/common'
+import { HomeOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import './ABreadCrumb.scss';
+import { useAppDispatch } from '@/hooks/redux';
+import { selectMenu } from '@/stores/actions/common';
+import { MenuPageCode } from '@/config/constants';
 
 type ABreadCrumbProps = {
-  config: ABreadCrumbConfig[]
-}
+  config: ABreadCrumbConfig[];
+};
 
 const ABreadCrumb: React.FC<ABreadCrumbProps> = props => {
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const directTo = (id: number, path: string) => {
-    dispatch(selectMenu(id))
-    navigate(path)
-  }
+    dispatch(selectMenu(id));
+    navigate(path);
+  };
 
   return props.config ? (
     <div className='a-breadcrumb-container'>
       <div className='nav-item'>
-        <div className='text clickable' onClick={() => directTo(1, '/')}>
+        <div className='text clickable' onClick={() => directTo(MenuPageCode.HOME, '/')}>
           <HomeOutlined />
         </div>
         {props.config.length > 0 ? <div className='separator'>/</div> : <></>}
@@ -37,12 +38,12 @@ const ABreadCrumb: React.FC<ABreadCrumbProps> = props => {
             )}
             {index == props.config.length - 1 ? <></> : <div className='separator'>/</div>}
           </div>
-        )
+        );
       })}
     </div>
   ) : (
     <></>
-  )
-}
+  );
+};
 
-export default ABreadCrumb
+export default ABreadCrumb;

@@ -1,12 +1,12 @@
-import { $get } from './http';
+import { http } from './http';
 
 class HomeAPI {
   async getCurrentActiveUsers() {
-    return $get<{
-      total: number
-      users: UserListItem[]
+    return http.$get<{
+      total: number;
+      users: UserListItem[];
     }>('/cau', {
-      fallbackResponse: {
+      fallback: {
         total: 0,
         users: [],
       },
@@ -14,18 +14,18 @@ class HomeAPI {
   }
 
   async getDailyActiveUsers() {
-    return $get<{ dau: number[][] }>('/dau', {
-      fallbackResponse: {
+    return http.$get<{ dau: number[][] }>('/dau', {
+      fallback: {
         dau: [],
       },
     });
   }
 
   async getMonthlyActiveUsers() {
-    return $get<{
-      mau: number[][]
+    return http.$get<{
+      mau: number[][];
     }>('/mau', {
-      fallbackResponse: {
+      fallback: {
         mau: [],
       },
     });

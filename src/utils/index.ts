@@ -71,12 +71,13 @@ export const handleResult = <T = any>(
     successMessage: '',
     errorMessage: '',
   },
-) => {
+): boolean => {
   const isErrorRes = !res.success;
-  if (isErrorRes && !res.hideMsg) {
-    if (options.notifyError !== false) errorMessage(options.errorMessage || res.msg || res.errMsg || 'Internal Error');
+  if (isErrorRes) {
+    if (!res.hideMsg && options.notifyError !== false)
+      errorMessage(options.errorMessage || res.msg || res.errMsg || 'Internal Error');
   } else {
-    if (options.notifySuccess || options.successMessage) {
+    if (!res.hideMsg && (options.notifySuccess || options.successMessage)) {
       successMessage(options.successMessage || res.msg);
     }
   }
